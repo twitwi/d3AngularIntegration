@@ -34,7 +34,7 @@
           // define render function
           scope.render = function(data){
             // remove all previous items before render
-            svg.selectAll("*").remove();
+            //svg.selectAll("*").remove();
 
             // setup variables
             var width, height, max;
@@ -50,8 +50,14 @@
             svg.attr('height', height);
 
             //create the rectangles for the bar chart
-            svg.selectAll("rect")
-              .data(data)
+            var rects = svg.selectAll("rect").data(data);
+            rects
+              .transition()
+                .duration(1000) // time of duration
+                .attr("width", function(d){
+                  return d.score/(max/width);
+                }) // width based on scale
+            rects
               .enter()
                 .append("rect")
                 .on("click", function(d, i){return scope.onClick({item: d});})
@@ -61,11 +67,7 @@
                 .attr("y", function(d, i){
                   return i * 35;
                 }) // height + margin between bars
-                .transition()
-                  .duration(1000) // time of duration
-                  .attr("width", function(d){
-                    return d.score/(max/width);
-                  }); // width based on scale
+              ;
 
             svg.selectAll("text")
               .data(data)
