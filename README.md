@@ -1,3 +1,5 @@
+[DEMO!](http://twitwi.github.io/d3AngularIntegration/app/)
+
 Integrating d3 and Angular
 ==========================
 There is a [github repo][1] with code to accompany this post.  Contributions are encouraged!
